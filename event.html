@@ -8,7 +8,7 @@
 		<script src="https://cdn.tailwindcss.com"></script>
 	</head>
 	<body class="min-h-screen gap-3">
-		<header class="bg-[#046a37] flex items-center justify-between text-white">
+		<header class="bg-[#046a37] flex items-center justify-between">
 			<a class="ml-4" href="./index.html">
 				<img
 					src="https://cdn.discordapp.com/attachments/989303001254604820/1113903138819297311/RWH_Logo_1.png"
@@ -19,9 +19,9 @@
 			</a>
 			<nav class="mr-4 hidden lg:flex">
 				<ul class="flex gap-5">
-					<li><a href="./events.html">Events</a></li>
-					<li><a href="#">Sign Up</a></li>
-					<li><a href="#">Login</a></li>
+					<li><a class="text-gray-50 hover:text-gray-300" href="./events.html">Events</a></li>
+					<li><a class="text-gray-50 hover:text-gray-300" href="#">Sign Up</a></li>
+					<li><a class="text-gray-50 hover:text-gray-300" href="#">Login</a></li>
 				</ul>
 			</nav>
 			<div class="flex mr-4 lg:hidden">
@@ -40,9 +40,9 @@
 			</div>
 		</header>
 		<main>
-			<h1 class="text-3xl text-center mt-2 mb-5">KBBQ</h1>
+			<h1 class="text-3xl text-center mt-2 mb-5 font-medium">KBBQ</h1>
 			<div class="flex justify-center xl:items-center flex-wrap xl:flex-nowrap gap-5">
-				<img class="max-h-80 max-w-md object-cover object-center" src="https://t.ly/j5vIF" alt="KBQ" />
+				<img class="max-h-80 max-w-md object-cover object-center aspect-square" src="https://t.ly/j5vIF" alt="KBQ" />
 				<div>
 					<p><span class="font-semibold">Host:</span> Isidro</p>
 					<p><span class="font-semibold">Date and Time:</span> Mon, Sep 12, 2023, 5:30PM - 6:30PM</p>
@@ -50,16 +50,20 @@
 					<p><span class="font-semibold">Details:</span> Food Meetup after a long summer of not meeting up.</p>
 				</div>
 			</div>
+			<div class="text-center mt-5">
+				<a class="inline-block bg-red-600 hover:bg-red-700 py-2 px-4 text-white rounded" href="#">Remove</a>
+				<a class="inline-block bg-[#046a37] hover:bg-green-900 py-2 px-6 text-white rounded" href="#">Edit</a>
+			</div>
 		</main>
-		<footer class="bg-[#046a37] flex items-center justify-center gap-12 text-white">
-			<p>© RWH Meetup</p>
+		<footer class="bg-[#046a37] flex items-center justify-center gap-12">
+			<p class="text-gray-50">© RWH Meetup</p>
 			<nav>
 				<ul class="flex gap-3">
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a class="text-gray-50 hover:text-gray-300" href="#">About</a></li>
+					<li><a class="text-gray-50 hover:text-gray-300" href="#">Contact</a></li>
 				</ul>
 			</nav>
-			<div>ICONS</div>
+			<div class="hidden sm:flex text-gray-50 hover:text-gray-300">ICONS</div>
 		</footer>
 	</body>
 </html>
