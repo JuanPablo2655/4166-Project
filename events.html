@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="./styles.css" />
 		<script src="https://cdn.tailwindcss.com"></script>
 	</head>
-	<body class="min-h-screen gap-3">
+	<body class="min-h-screen">
 		<header class="bg-[#046a37] flex items-center justify-between">
 			<a class="ml-4" href="./index.html">
 				<img
@@ -27,7 +27,7 @@
 			<div class="flex mr-4 lg:hidden">
 				<button>
 					<svg
-						class="h-7 w-7"
+						class="h-7 w-7 text-gray-50"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke-width="1.5"
@@ -39,19 +39,19 @@
 				</button>
 			</div>
 		</header>
-		<main>
-			<h1 class="text-3xl text-center mt-2 mb-5 font-medium">Events</h1>
+		<main class="my-5">
+			<h1 class="text-3xl text-center mb-5 font-medium">Events</h1>
 			<div class="mb-4">
 				<h2 class="text-2xl">Meetup</h2>
-				<p><a href="./event.html">KBBQ</a></p>
-				<p><a href="#">Food Meetup</a></p>
-				<p><a href="#">Hiking Meetup</a></p>
+				<p><a class="hover:text-gray-500" href="./event.html">KBBQ</a></p>
+				<p><a class="hover:text-gray-500" href="./event.html">Food Meetup</a></p>
+				<p><a class="hover:text-gray-500" href="./event.html">Hiking Meetup</a></p>
 			</div>
 			<div>
 				<h2 class="text-2xl">Study</h2>
-				<p><a href="#">1212</a></p>
-				<p><a href="#">2175</a></p>
-				<p><a href="#">2181</a></p>
+				<p><a class="hover:text-gray-500" href="./event.html">1212</a></p>
+				<p><a class="hover:text-gray-500" href="./event.html">2175</a></p>
+				<p><a class="hover:text-gray-500" href="./event.html">2181</a></p>
 			</div>
 			<a class="inline-block bg-red-600 hover:bg-red-700 py-2 px-4 text-white mt-2 rounded" href="#">Remove Event</a>
 			<a class="inline-block bg-[#046a37] hover:bg-green-900 py-2 px-4 text-white mt-2 rounded" href="./newEvent.html"
