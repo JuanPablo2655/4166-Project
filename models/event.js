@@ -93,5 +93,3 @@ exports.validate = (event, update = false) => {
 	if (!update && !event.image) throw new Error('Image is required.');
 	return true;
 };
-
-console.log(DateTime.local(2021, 10, 1, 20, 0).toISO({ includeOffset: false }));

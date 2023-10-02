@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 
+const mainRoutes = require('./routes/mainRoutes.js');
 const eventRoutes = require('./routes/eventRoutes.js');
 
 const port = 3000;
@@ -15,10 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
 
-app.get('/', (req, res) => {
-	res.render('index');
-});
-
+app.use('/', mainRoutes);
 app.use('/events', eventRoutes);
 
 app.listen(port, host, () => {
