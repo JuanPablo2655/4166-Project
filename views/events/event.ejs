@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head.ejs') %>
+		<title>RWH Meetup</title>
+	</head>
+	<body class="min-h-screen">
+		<%- include('../partials/header.ejs') %>
+		<main class="my-5">
+			<% if (event) { %>
+			<h1 class="text-3xl text-center mb-5 font-medium"><%= event.title %></h1>
+			<div class="flex justify-center xl:items-center flex-wrap xl:flex-nowrap gap-5">
+				<img class="max-h-80 max-w-md object-cover object-center aspect-square" src="<%= event.image %>" alt="KBQ" />
+				<div>
+					<p><span class="font-semibold">Host:</span> <%= event.host %></p>
+					<p><span class="font-semibold">Date and Time:</span> <%= event.start %></p>
+					<p><span class="font-semibold">Location:</span> <%= event.location %></p>
+					<p><span class="font-semibold">Details:</span> <%= event.details %></p>
+				</div>
+			</div>
+			<div class="text-center mt-5">
+				<form>
+					<button
+						class="inline-block bg-red-600 hover:bg-red-700 py-2 px-4 text-white rounded"
+						type="submit"
+						formmethod="POST"
+						formaction="/events/<%= event.id %>?_method=DELETE"
+					>
+						Remove
+					</button>
+					<button
+						class="inline-block bg-[#046a37] hover:bg-green-900 py-2 px-6 text-white rounded"
+						type="submit"
+						formmethod="GET"
+						formaction="/events/<%= event.id %>/edit"
+					>
+						Edit
+					</button>
+				</form>
+			</div>
+			<% } %>
+		</main>
+		<%- include('../partials/footer.ejs') %>
+	</body>
+</html>
