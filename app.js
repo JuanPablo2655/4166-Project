@@ -5,8 +5,7 @@ const methodOverride = require('method-override');
 const mainRoutes = require('./routes/mainRoutes.js');
 const eventRoutes = require('./routes/eventRoutes.js');
 
-const port = 3000;
-const host = 'localhost';
+const port = process.env.PORT || 3000;
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -33,6 +32,6 @@ app.use((err, req, res, next) => {
 	res.status(err.status).render('error', { err });
 });
 
-app.listen(port, host, () => {
-	console.log(`Server is running on http://${host}:${port}`);
+app.listen(port, () => {
+	console.log(`Server is running on http://localhost:${port}`);
 });
