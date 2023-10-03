@@ -63,7 +63,9 @@ exports.findAllCategories = () => {
 };
 
 exports.findById = id => {
-	return events.find(event => event.id === id);
+	const event = events.find(event => event.id === id);
+	if (!event) throw new Error(`Cannot find event with id ${id}`);
+	return event;
 };
 
 exports.create = event => {
@@ -74,22 +76,26 @@ exports.create = event => {
 
 exports.update = (id, updatedEvent) => {
 	const event = events.find(event => event.id === id);
+	if (!event) throw new Error(`Cannot find event with id ${id}`);
 	Object.assign(event, updatedEvent);
 };
 
 exports.delete = id => {
 	const index = events.findIndex(event => event.id === id);
+	if (index === -1) throw new Error(`Cannot find event with id ${id}`);
 	events.splice(index, 1);
 };
 
 exports.validate = (event, update = false) => {
-	if (!event.category) throw new Error('Category is required.');
-	if (!event.title) throw new Error('Title is required.');
-	// if (!event.host) throw new Error('Host is required.');
-	if (!event.location) throw new Error('Location is required.');
-	if (!event.start) throw new Error('Start is required.');
-	if (!event.end) throw new Error('End is required.');
-	if (!event.details) throw new Error('Details is required.');
-	if (!update && !event.image) throw new Error('Image is required.');
+	const errors = [];
+	if (!event.category) errors.push('category');
+	if (!event.title) errors.push('title');
+	// if (!event.host) errors.push('host');
+	if (!event.location) errors.push('location');
+	if (!event.start) errors.push('start');
+	if (!event.end) errors.push('end');
+	if (!event.details) errors.push('details');
+	if (!update && !event.image) errors.push('image');
+	if (errors.length > 0) throw new Error(`These entry is missing: ${errors.join(', ')}`);
 	return true;
 };
