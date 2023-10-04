@@ -9,8 +9,9 @@ exports.new = (req, res) => {
 	res.render('events/new');
 };
 
-exports.create = (req, res) => {
+exports.create = (req, res, next) => {
 	const event = req.body;
+	event.image = `../images/${req.file.filename}`;
 	model.validate(event);
 	model.create(event);
 	res.redirect('/events');
@@ -44,6 +45,8 @@ exports.update = (req, res, next) => {
 	try {
 		const id = req.params.id;
 		const updatedEvent = req.body;
+		console.log(req.file);
+		updatedEvent.image = `../images/${req.file.filename}`;
 		model.validate(updatedEvent, true);
 		model.update(id, updatedEvent);
 		res.redirect(`/events/${id}`);

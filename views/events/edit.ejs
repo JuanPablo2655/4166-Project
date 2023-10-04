@@ -8,7 +8,7 @@
 		<%- include('../partials/header.ejs') %>
 		<main class="my-5">
 			<h1 class="text-3xl text-center mb-5 font-medium">Edit <%= event.title %></h1>
-			<form action="/events/<%= event.id %>?_method=PUT" method="POST" autocomplete="off">
+			<form action="/events/<%= event.id %>?_method=PUT" enctype="multipart/form-data" method="POST" autocomplete="off">
 				<div>
 					<label for="category" class="block mb-1">Category</label>
 					<select class="border border-[#046a37] w-full p-1 rounded" name="category" id="category" required>
@@ -76,7 +76,7 @@
 				</div>
 				<div>
 					<label for="image" class="block mb-1">Image</label>
-					<input class="border border-[#046a37] w-full p-1 rounded" type="file" name="image" id="image" />
+					<input class="border border-[#046a37] w-full p-1 rounded" type="file" name="image" id="image" required/>
 				</div>
 				<button class="bg-[#046a37] hover:bg-green-900 w-full text-white p-2 rounded mt-4" type="submit">Submit</button>
 			</form>

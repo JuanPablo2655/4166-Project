@@ -22,14 +22,14 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
 	storage,
-	limits: { fileSize: 1 * 1024 * 1024 },
+	limits: { fileSize: 7 * 1048576 },
 	fileFilter,
 }).single('image');
 
 exports.fileUpload = (req, res, next) => {
 	upload(req, res, err => {
 		if (err) {
-			err.status = 400;
+			err.status = 404;
 			next(err);
 		} else {
 			next();
