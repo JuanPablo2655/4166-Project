@@ -29,7 +29,7 @@ const upload = multer({
 exports.fileUpload = (req, res, next) => {
 	upload(req, res, err => {
 		if (err) {
-			err.status = 404;
+			err.status = 400;
 			next(err);
 		} else {
 			next();

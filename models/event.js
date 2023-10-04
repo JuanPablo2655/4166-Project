@@ -11,7 +11,7 @@ const events = [
 		start: DateTime.local(2021, 10, 1, 18, 0).toISO({ includeOffset: false }),
 		end: DateTime.local(2021, 10, 1, 20, 0).toISO({ includeOffset: false }),
 		details: 'Food Meetup after a long summer of not meeting up.',
-		image: 'https://t.ly/j5vIF',
+		image: '/images/download.png',
 	},
 	{
 		id: uuidv4(),
@@ -22,7 +22,7 @@ const events = [
 		start: DateTime.local(2021, 10, 1, 18, 0).toISO({ includeOffset: false }),
 		end: DateTime.local(2021, 10, 1, 20, 0).toISO({ includeOffset: false }),
 		details: 'Food Meetup after a long summer of not meeting up.',
-		image: 'https://t.ly/j5vIF',
+		image: '/images/download.png',
 	},
 	{
 		id: uuidv4(),
@@ -33,7 +33,7 @@ const events = [
 		start: DateTime.local(2021, 10, 1, 18, 0).toISO({ includeOffset: false }),
 		end: DateTime.local(2021, 10, 1, 20, 0).toISO({ includeOffset: false }),
 		details: 'Food Meetup after a long summer of not meeting up.',
-		image: 'https://t.ly/j5vIF',
+		image: '/images/download.png',
 	},
 	{
 		id: uuidv4(),
@@ -44,7 +44,7 @@ const events = [
 		start: DateTime.local(2021, 10, 1, 18, 0).toISO({ includeOffset: false }),
 		end: DateTime.local(2021, 10, 1, 20, 0).toISO({ includeOffset: false }),
 		details: 'Food Meetup after a long summer of not meeting up.',
-		image: 'https://t.ly/j5vIF',
+		image: '/images/download.png',
 	},
 ];
 
