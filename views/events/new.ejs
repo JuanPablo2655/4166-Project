@@ -10,7 +10,7 @@
 			<h1 class="text-2xl text-center mb-5 font-medium">New Event</h1>
 			<form class="flex flex-col gap-2" action="/events" enctype="multipart/form-data" method="post" autocomplete="off">
 				<div>
-					<label for="category" class="block mb-1">Category</label>
+					<label for="category" class="block mb-1">Category <span class="text-red-700">*</span></label>
 					<select class="border border-[#046a37] w-full p-1 rounded" name="category" id="category" required>
 						<option selected disabled hidden>Select a Category</option>
 						<option value="meetups">Meetup</option>
@@ -19,7 +19,7 @@
 					</select>
 				</div>
 				<div>
-					<label for="title" class="block mb-1">Title</label>
+					<label for="title" class="block mb-1">Title <span class="text-red-700">*</span></label>
 					<input
 						class="border border-[#046a37] w-full p-1 rounded"
 						type="text"
@@ -30,7 +30,7 @@
 					/>
 				</div>
 				<div>
-					<label for="details" class="block mb-1">Details</label>
+					<label for="details" class="block mb-1">Details <span class="text-red-700">*</span></label>
 					<textarea
 						class="border border-[#046a37] w-full p-1 rounded align-top"
 						name="details"
@@ -42,7 +42,7 @@
 					></textarea>
 				</div>
 				<div>
-					<label for="location" class="block mb-1">Where</label>
+					<label for="location" class="block mb-1">Where <span class="text-red-700">*</span></label>
 					<input
 						class="border border-[#046a37] w-full p-1 rounded"
 						type="text"
@@ -53,7 +53,7 @@
 					/>
 				</div>
 				<div>
-					<label for="start" class="block mb-1">Start</label>
+					<label for="start" class="block mb-1">Start <span class="text-red-700">*</span></label>
 					<input
 						class="border border-[#046a37] w-full p-1 rounded"
 						type="datetime-local"
@@ -63,7 +63,7 @@
 					/>
 				</div>
 				<div>
-					<label for="end" class="block mb-1">End</label>
+					<label for="end" class="block mb-1">End <span class="text-red-700">*</span></label>
 					<input
 						class="border border-[#046a37] w-full p-1 rounded"
 						type="datetime-local"
@@ -73,7 +73,7 @@
 					/>
 				</div>
 				<div>
-					<label for="image" class="block mb-1">Image</label>
+					<label for="image" class="block mb-1">Image <span class="text-red-700">*</span></label>
 					<input class="border border-[#046a37] w-full p-1 rounded" type="file" name="image" id="image" required />
 				</div>
 				<button class="bg-[#046a37] hover:bg-green-900 w-full text-white p-2 rounded mt-4" type="submit">Submit</button>

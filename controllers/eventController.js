@@ -1,4 +1,5 @@
 const model = require('../models/event.js');
+const { DateTime } = require('luxon');
 
 exports.index = (req, res) => {
 	const categories = model.find();
@@ -10,17 +11,25 @@ exports.new = (req, res) => {
 };
 
 exports.create = (req, res, next) => {
-	const event = req.body;
-	event.image = `/images/${req.file.filename}`;
-	model.validate(event);
-	model.create(event);
-	res.redirect('/events');
+	try {
+		const event = req.body;
+		event.image = `/images/${req.file.filename}`;
+		model.validate(event);
+		model.create(event);
+		res.redirect('/events');
+	} catch (error) {
+		const err = new Error(error.message);
+		err.status = 404;
+		next(err);
+	}
 };
 
 exports.show = (req, res, next) => {
 	try {
 		const id = req.params.id;
-		const event = model.findById(id);
+		const event = JSON.parse(JSON.stringify(model.findById(id)));
+		event.start = DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_MED);
+		event.end = DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_MED);
 		res.render('events/event', { event });
 	} catch (error) {
 		const err = new Error(error.message);

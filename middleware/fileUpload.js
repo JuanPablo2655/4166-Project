@@ -16,13 +16,13 @@ const fileFilter = (req, file, cb) => {
 	if (mimeTypes.includes(file.mimetype)) {
 		return cb(null, true);
 	} else {
-		cb(new Error('Invalid file type. Only jepg, png, or gif are allowed.'));
+		cb(new Error('Invalid file type. Only jpeg, png, or gif are allowed'));
 	}
 };
 
 const upload = multer({
 	storage,
-	limits: { fileSize: 7 * 1048576 },
+	limits: { fileSize: 5 * 1048576 },
 	fileFilter,
 }).single('image');
 
