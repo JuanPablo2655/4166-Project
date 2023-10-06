@@ -154,10 +154,11 @@ exports.validate = (event, update = false) => {
 	if (!event.location) errors.push('location');
 	if (!event.start) errors.push('start');
 	if (!event.end) errors.push('end');
+	const start = DateTime.fromISO(event.start);
+	const end = DateTime.fromISO(event.end);
+	if (end < start) throw new Error('end date must be after start date');
 	if (!event.details) errors.push('details');
 	if (!update && !event.image) errors.push('image');
 	if (errors.length > 0) throw new Error(`These entry is missing: ${errors.join(', ')}`);
 	return true;
 };
-
-console.log(DateTime.fromISO(events[0].start).toLocaleString(DateTime.DATETIME_MED));

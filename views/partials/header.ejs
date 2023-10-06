@@ -15,7 +15,7 @@
 		</ul>
 	</nav>
 	<div class="flex mr-4 lg:hidden">
-		<button>
+		<button id="open">
 			<svg
 				class="h-7 w-7 text-gray-50"
 				fill="none"
@@ -28,4 +28,61 @@
 			</svg>
 		</button>
 	</div>
+	<nav id="nav" class="bg-[#046a37] fixed w-screen h-screen inset-0 flex flex-col justify-between p-8 hidden">
+		<div class="flex justify-between">
+			<ul class="flex flex-col gap-5">
+				<li><a class="text-gray-50 hover:text-gray-300" href="/events/new">New Event</a></li>
+				<li><a class="text-gray-50 hover:text-gray-300" href="/events">Events</a></li>
+				<li><a class="text-gray-50 hover:text-gray-300" href="/signup">Sign Up</a></li>
+				<li><a class="text-gray-50 hover:text-gray-300" href="/login">Login</a></li>
+			</ul>
+			<button id="close" class="h-fit w-fit">
+				<svg
+					class="h-7 w-7 text-gray-50"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					aria-hidden="true"
+					id="close"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+		</div>
+		<div class="">
+			<ul class="flex gap-5">
+				<li>
+					<a
+						class="text-gray-50 hover:text-gray-300 text-xl"
+						href="https://www.facebook.com/UNCCharlotte/"
+						target="_blank"
+						><i class="fa-brands fa-facebook"></i
+					></a>
+				</li>
+				<li>
+					<a
+						class="text-gray-50 hover:text-gray-300 text-xl"
+						href="https://www.linkedin.com/school/unc-charlotte/mycompany/verification/"
+						target="_blank"
+						><i class="fa-brands fa-linkedin"></i
+					></a>
+				</li>
+				<li>
+					<a class="text-gray-50 hover:text-gray-300 text-xl" href="https://twitter.com/unccharlotte/" target="_blank"
+						><i class="fa-brands fa-x-twitter"></i
+					></a>
+				</li>
+				<li>
+					<a
+						class="text-gray-50 hover:text-gray-300 text-xl"
+						href="https://www.instagram.com/unccharlotte/?hl=en"
+						target="_blank"
+						><i class="fa-brands fa-instagram"></i
+					></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<script async src="/js/nav.js"></script>
 </header>

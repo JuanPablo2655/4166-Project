@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
 	if (!err.status) {
 		err.status = 500;
-		// err.message = 'Internal Server Error';
+		err.message = 'Internal Server Error';
 	}
 	res.status(err.status).render('error', { err });
 });
