@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head.ejs') %>
+		<title>RWH Meetup</title>
+	</head>
+	<body class="min-h-screen">
+		<%- include('../partials/header.ejs') %>
+		<main class="my-5">
+			<h1 class="text-2xl text-center mb-5 font-medium">New Event</h1>
+			<form class="flex flex-col gap-2" action="/events" enctype="multipart/form-data" method="post" autocomplete="off">
+				<div>
+					<label for="category" class="block mb-1">Category <span class="text-red-700">*</span></label>
+					<select class="border border-[#046a37] w-full p-1 rounded" name="category" id="category" required>
+						<option selected disabled hidden>Select a Category</option>
+						<option value="meetups">Meetup</option>
+						<option value="study">Study</option>
+						<option value="gaming">Gaming</option>
+					</select>
+				</div>
+				<div>
+					<label for="title" class="block mb-1">Title <span class="text-red-700">*</span></label>
+					<input
+						class="border border-[#046a37] w-full p-1 rounded"
+						type="text"
+						name="title"
+						id="title"
+						placeholder="Title"
+						required
+					/>
+				</div>
+				<div>
+					<label for="details" class="block mb-1">Details <span class="text-red-700">*</span></label>
+					<textarea
+						class="border border-[#046a37] w-full p-1 rounded align-top"
+						name="details"
+						id="details"
+						cols="30"
+						rows="2"
+						placeholder="Description"
+						required
+					></textarea>
+				</div>
+				<div>
+					<label for="location" class="block mb-1">Where <span class="text-red-700">*</span></label>
+					<input
+						class="border border-[#046a37] w-full p-1 rounded"
+						type="text"
+						name="location"
+						id="location"
+						placeholder="Location"
+						required
+					/>
+				</div>
+				<div>
+					<label for="start" class="block mb-1">Start <span class="text-red-700">*</span></label>
+					<input
+						class="border border-[#046a37] w-full p-1 rounded"
+						type="datetime-local"
+						name="start"
+						id="start"
+						required
+					/>
+				</div>
+				<div>
+					<label for="end" class="block mb-1">End <span class="text-red-700">*</span></label>
+					<input
+						class="border border-[#046a37] w-full p-1 rounded"
+						type="datetime-local"
+						name="end"
+						id="end"
+						required
+					/>
+				</div>
+				<div>
+					<label for="image" class="block mb-1">Image <span class="text-red-700">*</span></label>
+					<input class="border border-[#046a37] w-full p-1 rounded" type="file" name="image" id="image" required />
+				</div>
+				<button class="bg-[#046a37] hover:bg-green-900 w-full text-white p-2 rounded mt-4" type="submit">Submit</button>
+			</form>
+		</main>
+		<%- include('../partials/footer.ejs') %>
+	</body>
+</html>
