@@ -1,8 +1,12 @@
 const model = require('../models/event.js');
 const { DateTime } = require('luxon');
 
-exports.index = (req, res) => {
-	const categories = model.find();
+exports.index = async (req, res) => {
+	const categoryList = await model.collection.distinct('category');
+	const events = await model.find().catch(err => next(err));
+	const categories = categoryList.map(category => {
+		return { title: category, events: events.filter(event => event.category === category) };
+	});
 	res.render('events/index', { categories });
 };
 
@@ -10,70 +14,113 @@ exports.new = (req, res) => {
 	res.render('events/new');
 };
 
-exports.create = (req, res, next) => {
+exports.create = async (req, res, next) => {
 	try {
-		const event = req.body;
+		const event = new model(req.body);
 		event.image = `/images/${req.file.filename}`;
-		model.validate(event);
-		model.create(event);
+		event.host = 'Isidro';
+		await event.save().catch(err => {
+			if (err.name === 'ValidationError') {
+				err.status = 400;
+			}
+			throw err;
+		});
 		res.redirect('/events');
 	} catch (error) {
-		const err = new Error(error.message);
-		err.status = 404;
-		next(err);
+		next(error);
 	}
 };
 
-exports.show = (req, res, next) => {
+exports.show = async (req, res, next) => {
 	try {
-		const id = req.params.id;
-		const event = JSON.parse(JSON.stringify(model.findById(id)));
-		event.start = DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_MED);
-		event.end = DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_MED);
+		const id = validateId(req.params.id);
+		const event = await model.findById(id).lean();
+		if (!event) {
+			const err = new Error(`Cannot find event with id ${req.params.id}`);
+			err.status = 404;
+			throw err;
+		}
+		event.start = DateTime.fromJSDate(event.start).toLocaleString(DateTime.DATETIME_MED);
+		event.end = DateTime.fromJSDate(event.end).toLocaleString(DateTime.DATETIME_MED);
+		console.log(event);
 		res.render('events/event', { event });
 	} catch (error) {
-		const err = new Error(error.message);
-		err.status = 404;
-		next(err);
+		console.log(error);
+		next(error);
 	}
 };
 
-exports.edit = (req, res, next) => {
+exports.edit = async (req, res, next) => {
 	try {
-		const id = req.params.id;
-		const event = model.findById(id);
+		const id = validateId(req.params.id);
+		const event = await model.findById(id).lean();
+		if (!event) {
+			const err = new Error(`Cannot find event with id ${req.params.id}`);
+			err.status = 404;
+			throw err;
+		}
+		event.start = DateTime.fromJSDate(event.start).toISO({ includeOffset: false });
+		event.end = DateTime.fromJSDate(event.end).toISO({ includeOffset: false });
+		console.log(event);
 		res.render('events/edit', { event });
 	} catch (error) {
-		const err = new Error(error.message);
-		err.status = 404;
-		next(err);
+		next(error);
 	}
 };
 
-exports.update = (req, res, next) => {
+exports.update = async (req, res, next) => {
 	try {
-		const id = req.params.id;
-		const updatedEvent = req.body;
+		const id = validateId(req.params.id);
+		const event = req.body;
+		console.log(typeof event === 'undefined' && event === null);
+		if (!event || !req.file) {
+			const err = new Error('Invalid event or file');
+			err.status = 400;
+			throw err;
+		}
+		console.log(event);
 		console.log(req.file);
-		updatedEvent.image = `/images/${req.file.filename}`;
-		model.validate(updatedEvent, true);
-		model.update(id, updatedEvent);
+		event.image = `/images/${req.file.filename}`;
+		const updatedEvent = await model
+			.findByIdAndUpdate(id, event, { useFindAndModify: false, runValidators: true })
+			.catch(err => {
+				if (err.name === 'ValidationError') {
+					err.status = 400;
+				}
+				throw err;
+			});
+		if (!updatedEvent) {
+			const err = new Error(`Cannot find event with id ${req.params.id}`);
+			err.status = 404;
+			throw err;
+		}
 		res.redirect(`/events/${id}`);
 	} catch (error) {
-		const err = new Error(error.message);
-		err.status = 404;
-		next(err);
+		console.log(error);
+		next(error);
 	}
 };
 
-exports.delete = (req, res, next) => {
+exports.delete = async (req, res, next) => {
 	try {
-		const id = req.params.id;
-		model.delete(id);
+		const id = validateId(req.params.id);
+		const event = await model.findByIdAndDelete(id, { useFindAndModify: false });
+		if (!event) {
+			const err = new Error(`Cannot find event with id ${req.params.id}`);
+			err.status = 404;
+			throw err;
+		}
 		res.redirect('/events');
 	} catch (error) {
-		const err = new Error(error.message);
-		err.status = 404;
-		next(err);
+		next(error);
 	}
 };
+
+function validateId(id) {
+	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+		const err = new Error('Invalid event id');
+		err.status = 400;
+		throw err;
+	}
+	return id;
+}
