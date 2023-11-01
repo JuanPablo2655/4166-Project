@@ -17,6 +17,11 @@ exports.new = (req, res) => {
 exports.create = async (req, res, next) => {
 	try {
 		const event = new model(req.body);
+		if (Object.keys(event).length === 0) {
+			const err = new Error("Can't create empty event");
+			err.status = 400;
+			throw err;
+		}
 		event.image = `/images/${req.file.filename}`;
 		event.host = 'Isidro';
 		await event.save().catch(err => {
@@ -72,15 +77,14 @@ exports.update = async (req, res, next) => {
 	try {
 		const id = validateId(req.params.id);
 		const event = req.body;
-		console.log(typeof event === 'undefined' && event === null);
-		if (!event || !req.file) {
-			const err = new Error('Invalid event or file');
+		if (req.file) {
+			event.image = `/images/${req.file.filename}`;
+		}
+		if (Object.keys(event).length === 0) {
+			const err = new Error('No fields to update');
 			err.status = 400;
 			throw err;
 		}
-		console.log(event);
-		console.log(req.file);
-		event.image = `/images/${req.file.filename}`;
 		const updatedEvent = await model
 			.findByIdAndUpdate(id, event, { useFindAndModify: false, runValidators: true })
 			.catch(err => {
@@ -104,7 +108,7 @@ exports.update = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
 	try {
 		const id = validateId(req.params.id);
-		const event = await model.findByIdAndDelete(id, { useFindAndModify: false });
+		const event = await model.findByIdAndDelete(id, { useFindAndModify: false }).catch(err => next(err));
 		if (!event) {
 			const err = new Error(`Cannot find event with id ${req.params.id}`);
 			err.status = 404;
