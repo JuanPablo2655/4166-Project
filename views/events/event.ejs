@@ -28,7 +28,7 @@
 						class="inline-block bg-red-600 hover:bg-red-700 py-2 px-4 text-white rounded"
 						type="submit"
 						formmethod="POST"
-						formaction="/events/<%= event.id %>?_method=DELETE"
+						formaction="/events/<%= event._id %>?_method=DELETE"
 					>
 						Remove
 					</button>
@@ -36,7 +36,7 @@
 						class="inline-block bg-[#046a37] hover:bg-green-900 py-2 px-6 text-white rounded"
 						type="submit"
 						formmethod="GET"
-						formaction="/events/<%= event.id %>/edit"
+						formaction="/events/<%= event._id %>/edit"
 					>
 						Edit
 					</button>

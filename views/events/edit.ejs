@@ -8,13 +8,15 @@
 		<%- include('../partials/header.ejs') %>
 		<main class="my-5">
 			<h1 class="text-3xl text-center mb-5 font-medium">Edit <%= event.title %></h1>
-			<form action="/events/<%= event.id %>?_method=PUT" enctype="multipart/form-data" method="POST" autocomplete="off">
+			<form action="/events/<%= event._id %>?_method=PUT" enctype="multipart/form-data" method="POST" autocomplete="off">
 				<div>
 					<label for="category" class="block mb-1">Category <span class="text-red-700">*</span></label>
 					<select class="border border-[#046a37] w-full p-1 rounded" name="category" id="category" required>
 						<option value="meetups" <% if (event.category === 'meetup') { %>selected<% } %>>Meetup</option>
 						<option value="study" <% if (event.category === 'study') { %>selected<% } %>>Study</option>
 						<option value="gaming" <% if (event.category === 'gaming') { %>selected<% } %>>Gaming</option>
+						<option value="food" <% if (event.category === 'food') { %>selected<% } %>>Food</option>
+						<option value="miscellaneous" <% if (event.category === 'miscellaneous') { %>selected<% } %>>Miscellaneous</option>
 					</select>
 				</div>
 				<div>

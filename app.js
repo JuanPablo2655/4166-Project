@@ -1,14 +1,21 @@
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const mongoose = require('mongoose');
 
 const mainRoutes = require('./routes/mainRoutes.js');
 const eventRoutes = require('./routes/eventRoutes.js');
 
 const port = process.env.PORT || 3000;
+const url = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/events';
 
 const app = express();
 app.set('view engine', 'ejs');
+
+mongoose.connect(url, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
