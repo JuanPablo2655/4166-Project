@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head.ejs') %>
+		<title>RWH Meetup</title>
+	</head>
+	<body class="min-h-screen">
+		<%- include('../partials/header.ejs') %>
+		<main class="my-5">
+			<h1 class="text-3xl text-center mb-5 font-medium">Sign Up</h1>
+			<div class="container mx-auto lg:px-48">
+				<form class="flex flex-col gap-2" action="/users" method="post" autocomplete="off">
+					<div>
+						<label for="username" class="block mb-1">Username</label>
+						<input
+							class="border border-[#046a37] w-full p-1 rounded"
+							type="text"
+							name="username"
+							id="username"
+							required
+						/>
+					</div>
+					<div>
+						<label for="firstName" class="block mb-1">First Name</label>
+						<input
+							class="border border-[#046a37] w-full p-1 rounded"
+							type="text"
+							name="firstName"
+							id="firstName"
+							required
+						/>
+					</div>
+					<div>
+						<label for="lastName" class="block mb-1">Last Name</label>
+						<input
+							class="border border-[#046a37] w-full p-1 rounded"
+							type="text"
+							name="lastName"
+							id="lastName"
+							required
+						/>
+					</div>
+					<div>
+						<label for="email" class="block mb-1">Email</label>
+						<input class="border border-[#046a37] w-full p-1 rounded" type="email" name="email" id="email" required />
+					</div>
+					<div>
+						<label for="password" class="block mb-1">Password</label>
+						<input
+							class="border border-[#046a37] w-full p-1 rounded"
+							type="password"
+							name="password"
+							id="password"
+							minlength="8"
+							required
+						/>
+					</div>
+					<div>
+						<label for="confirmPassword" class="block mb-1">Confirm Password</label>
+						<input
+							class="border border-[#046a37] w-full p-1 rounded"
+							type="password"
+							name="confirmPassword"
+							id="confirmPassword"
+							minlength="8"
+							required
+						/>
+					</div>
+					<button class="bg-[#046a37] hover:bg-green-900 w-full text-white p-2 rounded mt-4" type="submit">
+						Sign Up
+					</button>
+				</form>
+			</div>
+		</main>
+		<%- include('../partials/footer.ejs') %>
+	</body>
+</html>
