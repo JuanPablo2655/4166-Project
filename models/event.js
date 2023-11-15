@@ -15,9 +15,8 @@ const eventSchema = new Schema({
 		minLength: [3, 'Title must be at least 3 characters'],
 	},
 	host: {
-		type: String,
-		required: [true, 'Host is required'],
-		minLength: [3, 'Host must be at least 3 characters'],
+		type: Schema.Types.ObjectId,
+		ref: 'User',
 	},
 	location: {
 		type: String,
