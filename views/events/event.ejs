@@ -7,6 +7,7 @@
 	<body class="min-h-screen">
 		<%- include('../partials/header.ejs') %>
 		<main class="my-5">
+			<%- include('../partials/flash.ejs') %>
 			<% if (event) { %>
 			<h1 class="text-3xl text-center mb-5 font-medium"><%= event.title %></h1>
 			<div class="flex justify-center xl:items-center flex-wrap xl:flex-nowrap gap-5">
@@ -16,7 +17,7 @@
 					alt="Event Image"
 				/>
 				<div>
-					<p><span class="font-semibold">Host:</span> <%= event.host %></p>
+					<p><span class="font-semibold">Host:</span> <%= event.host.username %></p>
 					<p><span class="font-semibold">Date and Time:</span> <%= event.start %> - <%= event.end %></p>
 					<p><span class="font-semibold">Location:</span> <%= event.location %></p>
 					<p><span class="font-semibold">Details:</span> <%= event.details %></p>

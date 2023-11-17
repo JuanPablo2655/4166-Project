@@ -7,6 +7,7 @@
 	<body class="min-h-screen">
 		<%- include('../partials/header.ejs') %>
 		<main class="my-5">
+			<%- include('../partials/flash.ejs') %>
 			<h1 class="text-3xl text-center mb-5 font-medium">Edit <%= event.title %></h1>
 			<form action="/events/<%= event._id %>?_method=PUT" enctype="multipart/form-data" method="POST" autocomplete="off">
 				<div>

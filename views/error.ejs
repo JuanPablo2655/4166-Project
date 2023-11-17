@@ -7,6 +7,7 @@
 	<body class="min-h-screen">
 		<%- include('./partials/header.ejs') %>
 		<main class="my-5 flex flex-col gap-2 justify-center items-center">
+			<%- include('./partials/flash.ejs') %>
 			<h1 class="text-8xl font-bold"><%= err.status %></h1>
 			<p><%= err.message %></p>
 		</main>

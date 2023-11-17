@@ -8,10 +8,17 @@
 	</a>
 	<nav class="mr-4 hidden lg:flex">
 		<ul class="flex gap-5">
-			<li><a class="text-gray-50 hover:text-gray-300" href="/events/new">New Event</a></li>
+			<% if (user) { %>
+				<li><a class="text-gray-50 hover:text-gray-300" href="/events/new">New Event</a></li>
+			<% } %>
 			<li><a class="text-gray-50 hover:text-gray-300" href="/events">Events</a></li>
-			<li><a class="text-gray-50 hover:text-gray-300" href="/users/signup">Sign Up</a></li>
-			<li><a class="text-gray-50 hover:text-gray-300" href="/users/login">Login</a></li>
+			<% if (!user) { %>
+				<li><a class="text-gray-50 hover:text-gray-300" href="/users/signup">Sign Up</a></li>
+				<li><a class="text-gray-50 hover:text-gray-300" href="/users/login">Login</a></li>
+			<% } else { %>
+				<li><a class="text-gray-50 hover:text-gray-300" href="/users/profile">Profile</a></li>
+				<li><a class="text-gray-50 hover:text-gray-300" href="/users/logout">Logout</a></li>
+			<% } %>
 		</ul>
 	</nav>
 	<div class="flex mr-4 lg:hidden">
@@ -31,10 +38,17 @@
 	<nav id="nav" class="bg-[#046a37] fixed w-screen min-h-screen inset-0 flex flex-col justify-between p-8 hidden">
 		<div class="flex justify-between">
 			<ul class="flex flex-col gap-5">
-				<li><a class="text-gray-50 hover:text-gray-300" href="/events/new">New Event</a></li>
+				<% if (user) { %>
+					<li><a class="text-gray-50 hover:text-gray-300" href="/events/new">New Event</a></li>
+				<% } %>
 				<li><a class="text-gray-50 hover:text-gray-300" href="/events">Events</a></li>
-				<li><a class="text-gray-50 hover:text-gray-300" href="/users/signup">Sign Up</a></li>
-				<li><a class="text-gray-50 hover:text-gray-300" href="/users/login">Login</a></li>
+				<% if (!user) { %>
+					<li><a class="text-gray-50 hover:text-gray-300" href="/users/signup">Sign Up</a></li>
+					<li><a class="text-gray-50 hover:text-gray-300" href="/users/login">Login</a></li>
+				<% } else { %>
+					<li><a class="text-gray-50 hover:text-gray-300" href="/users/profile">Profile</a></li>
+					<li><a class="text-gray-50 hover:text-gray-300" href="/users/logout">Logout</a></li>
+				<% } %>
 			</ul>
 			<button id="close" class="h-fit w-fit">
 				<svg

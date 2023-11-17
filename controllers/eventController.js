@@ -23,7 +23,7 @@ exports.create = async (req, res, next) => {
 			throw err;
 		}
 		event.image = `/images/${req.file.filename}`;
-		event.host = 'Isidro';
+		event.host = req.session.user;
 		await event.save().catch(err => {
 			if (err.name === 'ValidationError') {
 				err.status = 400;
@@ -39,7 +39,7 @@ exports.create = async (req, res, next) => {
 exports.show = async (req, res, next) => {
 	try {
 		const id = validateId(req.params.id);
-		const event = await model.findById(id).lean();
+		const event = await model.findById(id).populate('host', 'username').lean();
 		if (!event) {
 			const err = new Error(`Cannot find event with id ${req.params.id}`);
 			err.status = 404;

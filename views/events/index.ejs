@@ -7,6 +7,7 @@
 	<body class="min-h-screen">
 		<%- include('../partials/header.ejs') %>
 		<main class="my-5">
+			<%- include('../partials/flash.ejs') %>
 			<h1 class="text-3xl text-center mb-5 font-medium">Events</h1>
 			<% if (categories.length) { %> <% categories.forEach(category => { %>
 			<div class="mb-4">

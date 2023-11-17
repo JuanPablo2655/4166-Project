@@ -13,14 +13,21 @@ exports.create = async (req, res, next) => {
 			err.status = 400;
 			throw err;
 		}
+		console.log(user);
+
+		if (req.body.password !== req.body.confirmPassword) {
+			req.flash('error', 'Passwords do not match');
+			return res.redirect('/users/signup');
+		}
+
 		await user.save().catch(err => {
 			if (err.name === 'ValidationError') {
 				req.flash('error', err.message);
-				return res.redirect('/users/new');
+				return res.redirect('/users/signup');
 			}
 			if (err.code === 11000) {
 				req.flash('error', 'Email is already taken');
-				return res.redirect('/users/new');
+				return res.redirect('/users/signup');
 			}
 			throw err;
 		});
@@ -42,6 +49,7 @@ exports.login = async (req, res, next) => {
 			req.flash('error', 'Invalid email');
 			return res.redirect('/users/login');
 		}
+		console.log(password);
 		const result = await user.comparePassword(password);
 		if (!result) {
 			req.flash('error', 'Invalid password');
@@ -57,7 +65,8 @@ exports.login = async (req, res, next) => {
 
 exports.profile = async (req, res, next) => {
 	const id = req.session.user;
-	const [user, event] = await Promise.all([model.find(id), Event.find({ host: id })]).catch(err => next(err));
+	const [user, event] = await Promise.all([model.findById(id), Event.find({ host: id })]).catch(err => next(err));
+	console.log(user, event);
 	res.render('users/profile', { user, event });
 };
 
