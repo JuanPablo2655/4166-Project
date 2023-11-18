@@ -65,9 +65,9 @@ exports.login = async (req, res, next) => {
 
 exports.profile = async (req, res, next) => {
 	const id = req.session.user;
-	const [user, event] = await Promise.all([model.findById(id), Event.find({ host: id })]).catch(err => next(err));
-	console.log(user, event);
-	res.render('users/profile', { user, event });
+	const [user, events] = await Promise.all([model.findById(id), Event.find({ host: id })]).catch(err => next(err));
+	console.log(user, events);
+	res.render('users/profile', { user, events });
 };
 
 exports.logout = (req, res, next) => {

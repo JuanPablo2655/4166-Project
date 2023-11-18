@@ -5,4 +5,5 @@ exports.validateId = (req, res, next) => {
 		error.status = 400;
 		return next(error);
 	}
+	next();
 };
