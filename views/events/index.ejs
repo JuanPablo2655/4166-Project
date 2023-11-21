@@ -7,20 +7,25 @@
 	<body class="min-h-screen">
 		<%- include('../partials/header.ejs') %>
 		<main class="my-5">
+			<%- include('../partials/flash.ejs') %>
 			<h1 class="text-3xl text-center mb-5 font-medium">Events</h1>
-			<% if (categories.length) { %> <% categories.forEach(category => { %>
-			<div class="mb-4">
-				<h2 class="text-2xl"><%= category.title.replace(/\w/, c => c.toUpperCase()) %></h2>
-				<% category.events.forEach(event => { %>
-				<p><a class="hover:text-gray-500" href="/events/<%= event._id %>"><%= event.title %></a></p>
+			<% if (categories.length) { %>
+				<% categories.forEach(category => { %>
+					<div class="mb-4">
+						<h2 class="text-2xl"><%= category.title.replace(/\w/, c => c.toUpperCase()) %></h2>
+						<% category.events.forEach(event => { %>
+							<p><a class="hover:text-gray-500" href="/events/<%= event._id %>"><%= event.title %></a></p>
+						<% }) %>
+					</div>
 				<% }) %>
-			</div>
-			<% }) %> <% } else { %>
-			<p class="text-center">No events found</p>
+			<% } else { %>
+				<p class="text-center">No events found</p>
 			<% } %>
-			<a class="inline-block bg-[#046a37] hover:bg-green-900 py-2 px-4 text-white mt-2 rounded" href="/events/new"
-				>Add Event</a
-			>
+			<% if (user) { %>
+				<a class="inline-block bg-[#046a37] hover:bg-green-900 py-2 px-4 text-white mt-2 rounded" href="/events/new"
+					>Add Event</a
+				>
+			<% } %>
 		</main>
 		<%- include('../partials/footer.ejs') %>
 	</body>

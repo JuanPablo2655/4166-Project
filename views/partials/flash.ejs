@@ -1,0 +1,10 @@
+<% if (errorMessages.length > 0) { %>
+    <% errorMessages.forEach(message => { %>
+        <div class="text-center bg-red-600 p-2 text-white rounded mb-5"><%= message %></div>
+    <% }) %>
+<% } %>
+<% if (successMessages.length > 0) { %>
+    <% successMessages.forEach(message => { %>
+        <div class="text-center bg-[#046a37] p-2 text-white rounded mb-5"><%= message %></div>
+    <% }) %>
+<% } %>
