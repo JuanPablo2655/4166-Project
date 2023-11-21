@@ -20,7 +20,8 @@ exports.isAuthor = async (req, res, next) => {
 		error.status = 404;
 		return next(error);
 	}
-	if (event.host !== req.session.user) {
+	console.log(event.host._id, req.session.user);
+	if (event.host._id != req.session.user) {
 		const error = new Error('You are not authorized');
 		error.status = 401;
 		return next(error);
