@@ -12,7 +12,7 @@
 			<div class="container mx-auto lg:px-48">
 				<form class="flex flex-col gap-2" action="/users" method="post" autocomplete="off">
 					<div>
-						<label for="username" class="block mb-1">Username</label>
+						<label for="username" class="block mb-1">Username <span class="text-red-700">*</span></label>
 						<input
 							class="border border-[#046a37] w-full p-1 rounded"
 							type="text"
@@ -22,7 +22,7 @@
 						/>
 					</div>
 					<div>
-						<label for="firstName" class="block mb-1">First Name</label>
+						<label for="firstName" class="block mb-1">First Name <span class="text-red-700">*</span></label>
 						<input
 							class="border border-[#046a37] w-full p-1 rounded"
 							type="text"
@@ -32,7 +32,7 @@
 						/>
 					</div>
 					<div>
-						<label for="lastName" class="block mb-1">Last Name</label>
+						<label for="lastName" class="block mb-1">Last Name <span class="text-red-700">*</span></label>
 						<input
 							class="border border-[#046a37] w-full p-1 rounded"
 							type="text"
@@ -42,11 +42,11 @@
 						/>
 					</div>
 					<div>
-						<label for="email" class="block mb-1">Email</label>
+						<label for="email" class="block mb-1">Email <span class="text-red-700">*</span></label>
 						<input class="border border-[#046a37] w-full p-1 rounded" type="email" name="email" id="email" required />
 					</div>
 					<div>
-						<label for="password" class="block mb-1">Password</label>
+						<label for="password" class="block mb-1">Password <span class="text-red-700">*</span></label>
 						<input
 							class="border border-[#046a37] w-full p-1 rounded"
 							type="password"
@@ -57,7 +57,7 @@
 						/>
 					</div>
 					<div>
-						<label for="confirmPassword" class="block mb-1">Confirm Password</label>
+						<label for="confirmPassword" class="block mb-1">Confirm Password <span class="text-red-700">*</span></label>
 						<input
 							class="border border-[#046a37] w-full p-1 rounded"
 							type="password"

@@ -56,7 +56,7 @@ exports.login = async (req, res, next) => {
 			return res.redirect('/users/login');
 		}
 		req.session.user = user._id;
-		req.flash('success', `Welcome back ${user.firstName}`);
+		req.flash('success', `Welcome back ${user.firstName} ${user.lastName}`);
 		res.redirect('/users/profile');
 	} catch (error) {
 		next(error);
