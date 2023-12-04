@@ -43,3 +43,4 @@ const eventSchema = new Schema({
 });
 
 module.exports = mongoose.model('Event', eventSchema);
+exports.categories = categories;
