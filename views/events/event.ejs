@@ -21,6 +21,14 @@
 						<p><span class="font-semibold">Date and Time:</span> <%= event.start %> - <%= event.end %></p>
 						<p><span class="font-semibold">Location:</span> <%= event.location %></p>
 						<p><span class="font-semibold">Details:</span> <%= event.details %></p>
+						<div>
+							<form action="/rsvps" method="post">
+								<input type="hidden" name="event" value="<%= event._id %>">
+								<input type="submit" name="status" value="Yes">
+								<input type="submit" name="status" value="No">
+								<input type="submit" name="status" value="Maybe">
+							</form>
+						</div>
 					</div>
 				</div>
 				<% if (event.host._id == user) { %>

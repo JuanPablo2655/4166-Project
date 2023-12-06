@@ -1,12 +1,10 @@
 const model = require('../models/rsvp.js');
 
-exports.create = async (req, res, next) => {
+exports.createOrUpdate = async (req, res, next) => {
 	try {
-		const rsvp = await model.create({
-			event: req.body.event,
-			user: req.session.user,
-			status: req.body.status,
-		});
+		const filter = { event: req.body.event, user: req.session.user };
+		const update = { status: req.body.status.tolowercase() };
+		await model.findOneAndUpdate(filter, update, { upsert: true });
 		req.flash('success', 'Your RSVP has been saved');
 		res.redirect(`/events/${rsvp.event}`);
 	} catch (err) {
@@ -14,17 +12,15 @@ exports.create = async (req, res, next) => {
 	}
 };
 
-exports.update = async (req, res, next) => {
+exports.delete = async (req, res, next) => {
 	try {
-		const event = res.body.event;
-		const user = res.session.user;
-		const rsvp = await model.findOneAndUpdate({ event, user }, req.body, { new: true });
+		const filter = { event: req.body.event, user: req.session.user };
+		const rsvp = await model.findOneAndRemove(filter);
 		if (!rsvp) {
 			req.flash('error', 'The RSVP could not be found');
 			res.redirect('back');
 		} else {
-			await rsvp.updateOne(req.body);
-			req.flash('success', 'The RSVP has been updated');
+			req.flash('success', 'The RSVP has been deleted');
 			res.redirect(`/events/${rsvp.event}`);
 		}
 	} catch (err) {
