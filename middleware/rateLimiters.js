@@ -34,7 +34,7 @@ exports.eventLimiter = rateLimit({
 
 exports.rsvpLimiter = rateLimit({
 	windowMs: minute * 5,
-	max: 10,
+	max: 5,
 	handler: (req, res, next) => {
 		const err = new Error('Too many RSVP requests, please try again later');
 		err.status = 429;

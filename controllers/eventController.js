@@ -1,4 +1,5 @@
 const model = require('../models/event.js');
+const RSVP = require('../models/rsvp.js');
 const { DateTime } = require('luxon');
 
 exports.index = async (req, res) => {
@@ -45,10 +46,11 @@ exports.show = async (req, res, next) => {
 			err.status = 404;
 			throw err;
 		}
+		const rsvps = await RSVP.find({ event: id, status: 'yes' });
+		console.log(rsvps);
 		event.start = DateTime.fromJSDate(event.start).toLocaleString(DateTime.DATETIME_MED);
 		event.end = DateTime.fromJSDate(event.end).toLocaleString(DateTime.DATETIME_MED);
-		console.log(event);
-		res.render('events/event', { event });
+		res.render('events/event', { event, rsvps: rsvps.length });
 	} catch (error) {
 		console.log(error);
 		next(error);
@@ -66,7 +68,6 @@ exports.edit = async (req, res, next) => {
 		}
 		event.start = DateTime.fromJSDate(event.start).toISO({ includeOffset: false });
 		event.end = DateTime.fromJSDate(event.end).toISO({ includeOffset: false });
-		console.log(event);
 		res.render('events/edit', { event });
 	} catch (error) {
 		next(error);
@@ -109,7 +110,8 @@ exports.delete = async (req, res, next) => {
 	try {
 		const id = validateId(req.params.id);
 		const event = await model.findByIdAndDelete(id, { useFindAndModify: false }).catch(err => next(err));
-		if (!event) {
+		const rsvps = await RSVP.deleteMany({ event: id }).catch(err => next(err));
+		if (!event || !rsvps) {
 			const err = new Error(`Cannot find event with id ${req.params.id}`);
 			err.status = 404;
 			throw err;

@@ -10,7 +10,7 @@
 			<%- include('../partials/flash.ejs') %>
 			<h1 class="text-3xl text-center mb-5 font-medium">Welcome <%= user.firstName + " " + user.lastName %></h1>
 			<h1 class="text-center font-semibold">Your Events</h1>
-			<div class="flex justify-center">
+			<div class="flex justify-center mb-8">
 				<% if (events.length === 0) { %>
 					<p class="text-center">You have not created any events yet.</p>
 				<% } else { %>
@@ -32,6 +32,31 @@
 										<form action="/events/<%= event._id %>?_method=DELETE" method="post">
 											<button class="text-red-600 hover:text-red-700" type="submit"><i class="fa-solid fa-trash"></i></button>
 										</form>
+									</td>
+								</tr>
+							<% }) %>
+						</tbody>
+					</table>
+				<% } %>
+			</div>
+			<h1 class="text-center font-semibold">Your RSVPs</h1>
+			<div class="flex justify-center">
+				<% if (rsvps.length === 0) { %>
+					<p class="text-center">You do not have any RSVPs yet.</p>
+				<% } else { %>
+					<table class="table-fixed border-separate border-spacing-x-5 border-spacing-y-1">
+						<thead>
+							<tr>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<% rsvps.forEach(rsvp => { %>
+								<tr>
+									<td><a class="hover:text-gray-500" href="/events/<%= rsvp.event._id %>"><%= rsvp.event.title %></a></td>
+									<td class="flex gap-2">
+										<%= rsvp.status.replace(/\w/, c => c.toUpperCase()) %>
 									</td>
 								</tr>
 							<% }) %>
