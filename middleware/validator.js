@@ -40,7 +40,7 @@ exports.validateLogin = [
 ];
 
 exports.validateRSVP = [
-	body('status', 'Invalid RSVP status').isIn(['yes', 'no', 'maybe', 'Yes', 'No', 'Maybe']).trim().escape(),
+	body('status', 'Invalid RSVP status').toLowerCase().isIn(['yes', 'no', 'maybe']).trim().escape(),
 ];
 
 exports.validateResults = (req, res, next) => {

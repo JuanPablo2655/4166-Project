@@ -1,4 +1,3 @@
-const { findById } = require('../models/event.js');
 const model = require('../models/rsvp.js');
 const Event = require('../models/event.js');
 
@@ -14,8 +13,9 @@ exports.createOrUpdate = async (req, res, next) => {
 		}
 		console.log(event);
 		if (event.host == req.session.user) {
-			req.flash('error', 'You cannot RSVP to your own event');
-			return res.redirect(`/events/${req.body.event}`);
+			const err = new Error('You cannot RSVP to your own event');
+			err.status = 401;
+			throw err;
 		}
 		await model.findOneAndUpdate(filter, update, { upsert: true }).catch(err => next(err));
 		req.flash('success', 'Your RSVP has been saved');
