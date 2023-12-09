@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 const mainRoutes = require('./routes/mainRoutes.js');
 const eventRoutes = require('./routes/eventRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
+const rsvpRoutes = require('./routes/rsvpRoutes.js');
 
 const port = process.env.PORT || 3000;
 const url = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/events';
@@ -51,6 +52,7 @@ app.use(methodOverride('_method'));
 app.use('/', mainRoutes);
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
+app.use('/rsvps', rsvpRoutes);
 
 app.use((req, res, next) => {
 	const err = new Error('The page you are looking for does not exist');

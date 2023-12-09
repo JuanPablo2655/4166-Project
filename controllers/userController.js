@@ -1,5 +1,6 @@
 const model = require('../models/user.js');
 const Event = require('../models/event.js');
+const RSVP = require('../models/rsvp.js');
 
 exports.new = (req, res) => {
 	res.render('users/new');
@@ -65,9 +66,14 @@ exports.login = async (req, res, next) => {
 
 exports.profile = async (req, res, next) => {
 	const id = req.session.user;
-	const [user, events] = await Promise.all([model.findById(id), Event.find({ host: id })]).catch(err => next(err));
-	console.log(user, events);
-	res.render('users/profile', { user, events });
+	const [user, events, rsvps] = await Promise.all([
+		model.findById(id),
+		Event.find({ host: id }),
+		RSVP.find({ user: id }).populate('event', 'title'),
+	]).catch(err => next(err));
+	console.log(user, events, rsvps);
+
+	res.render('users/profile', { user, events, rsvps });
 };
 
 exports.logout = (req, res, next) => {
